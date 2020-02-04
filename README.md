@@ -45,11 +45,6 @@ export default ItemList
 ...and this is what the test looks like
 
 ```typescript jsx
-import React from 'react';
-import ReactDOM from 'react-dom';
-import ItemList from '../item-list';
-// Your job:
-
 test('Test the case where the items provided is empty', () => {
   const container = document.createElement('div');
   ReactDOM.render(<ItemList items={[]}/>, container);
@@ -59,3 +54,17 @@ test('Test the case where the items provided is empty', () => {
 **Note:** We're not using `container.innerHTML` because if we ever change the type of HTML Element which`'no items'` 
 is wrapped in, we'll have to change the test as well. Using `container.textContent` doesn't care about that and
 therefore doesn't break when we wrap `'no items'` in a `<div/>` or a `<span/>`
+
+Matching items in an array is also possible.
+
+```typescript jsx
+test('Test the case where there are items in the list', () => {
+  const container = document.createElement('div');
+  ReactDOM.render(<ItemList items={[ 'apple', 'orange', 'pear' ]}/>, container);
+  expect(container.textContent).toMatch('apple');
+  expect(container.textContent).toMatch('orange');
+  expect(container.textContent).toMatch('pear');
+});
+```
+
+If DOM structure is relevant, snapshot tests are available (covered later).

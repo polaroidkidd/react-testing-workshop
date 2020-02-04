@@ -6,13 +6,15 @@ import ItemList from '../item-list';
 test('Test the case where the items provided is empty', () => {
   const container = document.createElement('div');
   ReactDOM.render(<ItemList items={[]}/>, container);
-  expect(container.textContent).toBe('no items');
+  expect(container.textContent).toMatch('no items');
 });
 
 test('Test the case where there are items in the list', () => {
   const container = document.createElement('div');
   ReactDOM.render(<ItemList items={[ 'apple', 'orange', 'pear' ]}/>, container);
-  expect(container.textContent).toBe('appleorangepear');
+  expect(container.textContent).toMatch('apple');
+  expect(container.textContent).toMatch('orange');
+  expect(container.textContent).toMatch('pear');
 });
 //
 // Don't overthink it. This is just a practice run to warm you up
